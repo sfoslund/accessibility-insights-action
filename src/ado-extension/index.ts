@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 import 'reflect-metadata';
-import './module-name-mapper';
+import '../module-name-mapper';
 
-import { setupIocContainer } from './ioc/setup-ioc-container';
-import { Logger } from './logger/logger';
-import { Scanner } from './scanner/scanner';
+import { setupIocContainer } from '../ioc/setup-ioc-container';
+import { Logger } from '../logger/logger';
+import { Scanner } from '../scanner/scanner';
 
 (async () => {
     const container = setupIocContainer();

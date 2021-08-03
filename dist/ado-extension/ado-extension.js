@@ -2823,16 +2823,8 @@ const Endpoints = {
     uploadSarif: ["POST /repos/{owner}/{repo}/code-scanning/sarifs"]
   },
   codesOfConduct: {
-    getAllCodesOfConduct: ["GET /codes_of_conduct", {
-      mediaType: {
-        previews: ["scarlet-witch"]
-      }
-    }],
-    getConductCode: ["GET /codes_of_conduct/{key}", {
-      mediaType: {
-        previews: ["scarlet-witch"]
-      }
-    }],
+    getAllCodesOfConduct: ["GET /codes_of_conduct"],
+    getConductCode: ["GET /codes_of_conduct/{key}"],
     getForRepo: ["GET /repos/{owner}/{repo}/community/code_of_conduct", {
       mediaType: {
         previews: ["scarlet-witch"]
@@ -3734,7 +3726,7 @@ const Endpoints = {
   }
 };
 
-const VERSION = "5.4.1";
+const VERSION = "5.5.2";
 
 function endpointsToMethods(octokit, endpointsMap) {
   const newMethods = {};
@@ -4243,7 +4235,7 @@ var pluginRequestLog = __webpack_require__(/*! @octokit/plugin-request-log */ ".
 var pluginPaginateRest = __webpack_require__(/*! @octokit/plugin-paginate-rest */ "./node_modules/@octokit/plugin-paginate-rest/dist-node/index.js");
 var pluginRestEndpointMethods = __webpack_require__(/*! @octokit/plugin-rest-endpoint-methods */ "./node_modules/@octokit/plugin-rest-endpoint-methods/dist-node/index.js");
 
-const VERSION = "18.6.7";
+const VERSION = "18.7.2";
 
 const Octokit = core.Octokit.plugin(pluginRequestLog.requestLog, pluginRestEndpointMethods.legacyRestEndpointMethods, pluginPaginateRest.paginateRest).defaults({
   userAgent: `octokit-rest.js/${VERSION}`
@@ -65555,6 +65547,45 @@ function toIdentifier (str) {
 
 /***/ }),
 
+/***/ "./src/ado-extension/index.ts":
+/*!************************************!*\
+  !*** ./src/ado-extension/index.ts ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+__webpack_require__(/*! reflect-metadata */ "./node_modules/reflect-metadata/Reflect.js");
+__webpack_require__(/*! ../module-name-mapper */ "./src/module-name-mapper.ts");
+const setup_ioc_container_1 = __webpack_require__(/*! ../ioc/setup-ioc-container */ "./src/ioc/setup-ioc-container.ts");
+const logger_1 = __webpack_require__(/*! ../logger/logger */ "./src/logger/logger.ts");
+const scanner_1 = __webpack_require__(/*! ../scanner/scanner */ "./src/scanner/scanner.ts");
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    const container = setup_ioc_container_1.setupIocContainer();
+    const logger = container.get(logger_1.Logger);
+    yield logger.setup();
+    const scanner = container.get(scanner_1.Scanner);
+    yield scanner.scan();
+}))().catch((error) => {
+    console.log('Exception thrown in action: ', error);
+    process.exit(1);
+});
+
+
+/***/ }),
+
 /***/ "./src/axe/axe-info.ts":
 /*!*****************************!*\
   !*** ./src/axe/axe-info.ts ***!
@@ -65656,45 +65687,6 @@ exports.webToolName = `${exports.brand} Web`;
 exports.brandLogoImg = 'https://accessibilityinsights.io/img/a11yinsights-blue.svg';
 exports.checkRunName = 'Accessibility Checks';
 exports.checkRunDetailsTitle = `Accessibility Automated Checks Results`;
-
-
-/***/ }),
-
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-__webpack_require__(/*! reflect-metadata */ "./node_modules/reflect-metadata/Reflect.js");
-__webpack_require__(/*! ./module-name-mapper */ "./src/module-name-mapper.ts");
-const setup_ioc_container_1 = __webpack_require__(/*! ./ioc/setup-ioc-container */ "./src/ioc/setup-ioc-container.ts");
-const logger_1 = __webpack_require__(/*! ./logger/logger */ "./src/logger/logger.ts");
-const scanner_1 = __webpack_require__(/*! ./scanner/scanner */ "./src/scanner/scanner.ts");
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    const container = setup_ioc_container_1.setupIocContainer();
-    const logger = container.get(logger_1.Logger);
-    yield logger.setup();
-    const scanner = container.get(scanner_1.Scanner);
-    yield scanner.scan();
-}))().catch((error) => {
-    console.log('Exception thrown in action: ', error);
-    process.exit(1);
-});
 
 
 /***/ }),
@@ -68996,9 +68988,9 @@ module.exports = require("zlib");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.ts");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/ado-extension/index.ts");
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=ado-extension.js.map

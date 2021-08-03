@@ -6,14 +6,10 @@ const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-module.exports = (env) => {
-    const version = env ? env.version : 'dev';
+const commonConfig = (version) => {
     console.log(`Building for version : ${version}`);
     return {
         devtool: 'cheap-source-map',
-        entry: {
-            ['index']: path.resolve('./src/index.ts'),
-        },
         // We special case MPL-licensed dependencies ('axe-core', '@axe-core/puppeteer') because we want to avoid including their source in the same file as non-MPL code.
         externals: ['axe-core', 'accessibility-insights-report', 'accessibility-insights-scan'],
         mode: 'development',
@@ -38,11 +34,6 @@ module.exports = (env) => {
         node: {
             __dirname: false,
         },
-        output: {
-            path: path.resolve('./dist'),
-            filename: '[name].js',
-            libraryTarget: 'commonjs2',
-        },
         plugins: [
             new webpack.DefinePlugin({
                 __IMAGE_VERSION__: JSON.stringify(version),
@@ -57,3 +48,33 @@ module.exports = (env) => {
         target: 'node',
     };
 };
+
+module.exports = (env) => {
+    const version = env ? env.version : 'dev';
+    return [
+        {
+            ...commonConfig(version),
+            name: 'ado-extension',
+            entry: {
+                ['ado-extension']: path.resolve('./src/ado-extension/index.ts')
+            },
+            output: {
+                path: path.resolve('./dist/ado-extension'),
+                filename: '[name].js',
+                libraryTarget: 'commonjs2',
+            },
+        },
+        {
+            ...commonConfig(version),
+            name: 'gh-action',
+            entry: {
+                ['gh-action']: path.resolve('./src/gh-action/index.ts'),
+            },
+            output: {
+                path: path.resolve('./dist/gh-action'),
+                filename: '[name].js',
+                libraryTarget: 'commonjs2',
+            },
+        },
+    ];
+}
