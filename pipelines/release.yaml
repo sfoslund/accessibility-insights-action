@@ -29,7 +29,7 @@ resources:
 # We purposely break if the build is on a non-main branch but
 # specifies the canary extension ID
 stages:
-    - stage: package_vsix_file_foo
+    - stage: package_vsix_file
       condition: or(ne(variables.extensionId, 'canary'), eq(variables.resourceIsMain, true))
       jobs:
           - job:
