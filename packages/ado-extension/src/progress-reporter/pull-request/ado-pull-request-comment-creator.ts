@@ -159,7 +159,7 @@ export class AdoPullRequestCommentCreator extends ProgressReporter {
             await gitApiObject.updateComment(newCurrentComment, repoId, prId, existingThread.id, existingCurrentComment.id);
         }
 
-        await this.failOnAccessibilityError(combinedReportResult);
+        this.failOnAccessibilityError(combinedReportResult);
     }
 
     // eslint-disable-next-line @typescript-eslint/require-await
