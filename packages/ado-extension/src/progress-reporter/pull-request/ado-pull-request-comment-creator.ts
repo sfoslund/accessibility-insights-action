@@ -90,7 +90,7 @@ export class AdoPullRequestCommentCreator extends ProgressReporter {
 
     public async completeRun(combinedReportResult: CombinedReportParameters): Promise<void> {
         if (!this.isSupported()) {
-            return;
+            return Promise.resolve();
         }
 
         const reportMarkdown = this.reportMarkdownConvertor.convert(
@@ -165,7 +165,7 @@ export class AdoPullRequestCommentCreator extends ProgressReporter {
     // eslint-disable-next-line @typescript-eslint/require-await
     public async failRun(message: string): Promise<void> {
         if (!this.isSupported()) {
-            return;
+            return Promise.resolve();
         }
 
         throw message;
@@ -173,6 +173,7 @@ export class AdoPullRequestCommentCreator extends ProgressReporter {
 
     private async failOnAccessibilityError(combinedReportResult: CombinedReportParameters): Promise<void> {
         if (this.adoTaskConfig.getFailOnAccessibilityError() && combinedReportResult.results.urlResults.failedUrls > 0) {
+            console.log(`Failing Run On Accessibility Error`);
             await this.failRun('Failed Accessibility Error');
         }
     }
