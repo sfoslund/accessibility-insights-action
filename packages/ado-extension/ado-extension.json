@@ -24,9 +24,7 @@
             "path": "overview.md"
         }
     },
-    "galleryFlags": [
-        "Preview"
-    ],
+    "galleryFlags": ["Preview"],
     "contributions": [
         {
             "id": "task",

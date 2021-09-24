@@ -52,7 +52,6 @@ const newPackageJson = {
     devDependencies: undefined,
 };
 
-
 fs.writeFileSync('dist/overview.md', 'Sample overview');
 console.log('made overview');
 
