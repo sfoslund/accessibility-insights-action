@@ -19,6 +19,9 @@
             "path": "pkg"
         }
     ],
+    "galleryFlags": [
+        "Preview"
+    ],
     "contributions": [
         {
             "id": "task",
