@@ -52,6 +52,10 @@ const newPackageJson = {
     devDependencies: undefined,
 };
 
+
+fs.writeFileSync('dist/overview.md', 'Sample overview');
+console.log('made overview');
+
 fs.writeFileSync('dist/pkg/package.json', JSON.stringify(newPackageJson, undefined, 4));
 console.log('copied package.json to dist/pkg/package.json');
 
