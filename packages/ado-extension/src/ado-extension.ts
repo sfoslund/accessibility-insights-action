@@ -10,6 +10,7 @@ import { setupIocContainer } from './ioc/setup-ioc-container';
 
 export function runScan() {
     (async () => {
+        console.log('Test Karan');
         const container = setupIocContainer();
         const logger = container.get(Logger);
         await logger.setup();
