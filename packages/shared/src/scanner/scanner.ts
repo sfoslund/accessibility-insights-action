@@ -58,6 +58,8 @@ export class Scanner {
         let localServerUrl: string;
 
         try {
+            this.logger.logInfo(`Karan's extension`);
+
             await this.allProgressReporter.start();
 
             if (isEmpty(this.taskConfig.getUrl())) {
