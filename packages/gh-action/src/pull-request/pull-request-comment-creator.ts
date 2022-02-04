@@ -54,7 +54,7 @@ export class PullRequestCommentCreator extends ProgressReporter {
                     await this.octokit.issues.updateComment({
                         owner: this.githubObj.context.repo.owner,
                         repo: this.githubObj.context.repo.repo,
-                        body: reportMarkdown,
+                        body: reportMarkdown + '\n\n this to test comment behavior',
                         comment_id: existingComment.id,
                     }),
             );
