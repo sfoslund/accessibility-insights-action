@@ -14,6 +14,8 @@ import { iocTypes } from './ioc-types';
 import { setupCliContainer } from 'accessibility-insights-scan';
 import { ProgressReporter } from '../progress-reporter/progress-reporter';
 import { ArtifactsInfoProvider } from '../artifacts-info-provider';
+import { ConsoleLogFormatter } from '../console-output/console-log-formatter';
+import { MarkdownFormatter } from '../mark-down/markdown-formatter';
 
 export function setupIocContainer(container = new inversify.Container({ autoBindInjectable: true })): inversify.Container {
     setupSharedIocContainer(container);
@@ -35,6 +37,8 @@ export function setupSharedIocContainer(container = new inversify.Container({ au
     container.bind(iocTypes.Express).toConstantValue(express);
     container.bind(iocTypes.ServeStatic).toConstantValue(serveStatic);
     container.bind(iocTypes.ReportFactory).toConstantValue(reporterFactory);
+    container.bind(iocTypes.ConsoleLogFormatter).toConstantValue(ConsoleLogFormatter);
+    container.bind(iocTypes.MarkdownFormatter).toConstantValue(MarkdownFormatter);
 
     container
         .bind(Logger)

@@ -2,19 +2,30 @@
 // Licensed under the MIT License.
 
 import { toolName } from '../content/strings';
+import { LogFormatter } from '../utils/LogFormatter';
 
-export const link = (href: string, text: string): string => {
-    return `${text} (${href})`;
-};
+export class ConsoleLogFormatter implements LogFormatter {
+    public link = (href: string, text: string): string => {
+        return `${text} (${href})`;
+    };
+    
+    public listItem = (text: string): string => {
+        return `* ${text}`;
+    };
+    
+    public productTitle = (): string => {
+        return `${toolName}`;
+    };
+    
+    public footerSeparator = (): string => `-------------------`;
+    
+    public sectionSeparator = (): string => '\n';
 
-export const listItem = (text: string): string => {
-    return `* ${text}`;
-};
+    public escaped: (markdown: string) => string = (markdown) => markdown;
 
-export const productTitle = (): string => {
-    return `${toolName}`;
-};
+    public snippet: (text: string) => string = (text) => text; 
 
-export const footerSeparator = (): string => `-------------------`;
+    public heading: (text: string, headingLevel: number) => string = (text) => text; 
 
-export const sectionSeparator = (): string => '\n';
+    public bold: (text: string) => string = (text) => text; 
+}

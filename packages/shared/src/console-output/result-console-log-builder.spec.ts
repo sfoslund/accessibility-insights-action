@@ -10,6 +10,7 @@ import { BaselineEvaluation, CountsByRule } from 'accessibility-insights-scan';
 import { BaselineInfo } from '../baseline-info';
 import { ArtifactsInfoProvider } from '../artifacts-info-provider';
 import { IMock, Mock, MockBehavior, Times } from 'typemoq';
+import { ConsoleLogFormatter } from './console-log-formatter';
 
 describe(ResultConsoleLogBuilder, () => {
     let combinedReportResult: CombinedReportParameters;
@@ -18,7 +19,7 @@ describe(ResultConsoleLogBuilder, () => {
 
     beforeEach(() => {
         artifactsInfoProviderMock = Mock.ofType<ArtifactsInfoProvider>(undefined, MockBehavior.Strict);
-        resultConsoleLogBuilder = new ResultConsoleLogBuilder(artifactsInfoProviderMock.object);
+        resultConsoleLogBuilder = new ResultConsoleLogBuilder(artifactsInfoProviderMock.object, new ConsoleLogFormatter());
     });
 
     it('builds error content', () => {

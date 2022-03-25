@@ -11,4 +11,6 @@ export const iocTypes = {
     TaskConfig: 'TaskConfig',
     ProgressReporters: 'ProgressReporters',
     ArtifactsInfoProvider: 'ArtifactsInfoProvider',
+    MarkdownFormatter: 'MarkdownFormatter',
+    ConsoleLogFormatter: 'ConsoleLogFormatter',
 };

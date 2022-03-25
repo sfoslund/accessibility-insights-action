@@ -6,8 +6,6 @@ exports[`MarkdownFormatter footerSeparator 1`] = `"---"`;
 
 exports[`MarkdownFormatter heading 1`] = `"## heading"`;
 
-exports[`MarkdownFormatter image 1`] = `"![alt](src)"`;
-
 exports[`MarkdownFormatter link 1`] = `"[text](href)"`;
 
 exports[`MarkdownFormatter listItem 1`] = `"* li"`;
@@ -20,3 +18,9 @@ exports[`MarkdownFormatter sectionSeparator 1`] = `
 `;
 
 exports[`MarkdownFormatter snippet 1`] = `"\`code\`"`;
+
+exports[`MarkdownFormatter static image 1`] = `"![alt](src)"`;
+
+exports[`MarkdownFormatter static link 1`] = `"[text](href)"`;
+
+exports[`MarkdownFormatter static productTitle 1`] = `"![Accessibility Insights](https://accessibilityinsights.io/img/a11yinsights-blue.svg) Accessibility Insights"`;

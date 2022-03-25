@@ -1,26 +1,49 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { footerSeparator, link, listItem, productTitle, sectionSeparator } from './console-log-formatter';
+import { ConsoleLogFormatter } from "./console-log-formatter";
 
 describe('ConsoleLogFormatter', () => {
+    let testSubject: ConsoleLogFormatter;
+
+    beforeAll(() => {
+        testSubject = new ConsoleLogFormatter();
+    })
+
     it('link', () => {
-        expect(link('href', 'text')).toMatchSnapshot();
+        expect(testSubject.link('href', 'text')).toMatchSnapshot();
     });
 
     it('listItem', () => {
-        expect(listItem('li')).toMatchSnapshot();
+        expect(testSubject.listItem('li')).toMatchSnapshot();
     });
 
     it('productTitle', () => {
-        expect(productTitle()).toMatchSnapshot();
+        expect(testSubject.productTitle()).toMatchSnapshot();
     });
 
     it('footerSeparator', () => {
-        expect(footerSeparator()).toMatchSnapshot();
+        expect(testSubject.footerSeparator()).toMatchSnapshot();
     });
 
     it('sectionSeparator', () => {
-        expect(sectionSeparator()).toMatchSnapshot();
+        expect(testSubject.sectionSeparator()).toMatchSnapshot();
+    });
+    
+    it('escaped', () => {
+        expect(testSubject.escaped('<img>')).toEqual('<img>');
+    });
+
+    it('snippet', () => {
+        expect(testSubject.snippet('code')).toEqual('code');
+    });
+
+
+    it('heading', () => {
+        expect(testSubject.heading('heading', 2)).toEqual('heading');
+    });
+
+    it('bold', () => {
+        expect(testSubject.bold('text')).toEqual('text');
     });
 });

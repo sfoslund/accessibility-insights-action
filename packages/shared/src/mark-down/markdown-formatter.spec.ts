@@ -1,57 +1,61 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import {
-    bold,
-    escaped,
-    footerSeparator,
-    heading,
-    image,
-    link,
-    listItem,
-    productTitle,
-    sectionSeparator,
-    snippet,
-} from './markdown-formatter';
+import { MarkdownFormatter } from "./markdown-formatter";
+
 
 describe('MarkdownFormatter', () => {
+    let testSubject: MarkdownFormatter;
+
+    beforeAll(() => {
+        testSubject = new MarkdownFormatter();
+    })
+
     it('escaped', () => {
-        expect(escaped('<img>')).toEqual('\\<img>');
+        expect(testSubject.escaped('<img>')).toEqual('\\<img>');
     });
 
     it('snippet', () => {
-        expect(snippet('code')).toMatchSnapshot();
+        expect(testSubject.snippet('code')).toMatchSnapshot();
     });
 
     it('link', () => {
-        expect(link('href', 'text')).toMatchSnapshot();
-    });
-
-    it('image', () => {
-        expect(image('alt', 'src')).toMatchSnapshot();
+        expect(testSubject.link('href', 'text')).toMatchSnapshot();
     });
 
     it('listItem', () => {
-        expect(listItem('li')).toMatchSnapshot();
+        expect(testSubject.listItem('li')).toMatchSnapshot();
     });
 
     it('heading', () => {
-        expect(heading('heading', 2)).toMatchSnapshot();
+        expect(testSubject.heading('heading', 2)).toMatchSnapshot();
     });
 
     it('bold', () => {
-        expect(bold('text')).toMatchSnapshot();
+        expect(testSubject.bold('text')).toMatchSnapshot();
     });
 
     it('productTitle', () => {
-        expect(productTitle()).toMatchSnapshot();
+        expect(testSubject.productTitle()).toMatchSnapshot();
     });
 
     it('footerSeparator', () => {
-        expect(footerSeparator()).toMatchSnapshot();
+        expect(testSubject.footerSeparator()).toMatchSnapshot();
     });
 
     it('sectionSeparator', () => {
-        expect(sectionSeparator()).toMatchSnapshot();
+        expect(testSubject.sectionSeparator()).toMatchSnapshot();
+    });
+
+    it('static link', () => {
+        expect(MarkdownFormatter.link('href', 'text')).toMatchSnapshot();
+    });
+
+    it('static image', () => {
+        expect(MarkdownFormatter.image('alt', 'src')).toMatchSnapshot();
+    });
+
+    it('static productTitle', () => {
+        expect(MarkdownFormatter.productTitle()).toMatchSnapshot();
     });
 });
